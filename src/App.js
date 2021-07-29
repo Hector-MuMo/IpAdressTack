@@ -3,8 +3,6 @@ import "./App.css";
 import Map from "./components/Maps";
 import SearchForm from "./components/SearchForm";
 
-const KEY = "2c33a5927185030326ffd62e614573e0";
-
 function App() {
   const [ipData, setIpData] = useState("");
   const [infoIp, setInfoIp] = useState(false);
@@ -12,11 +10,9 @@ function App() {
   //CheckLocalIP
   useEffect(() => {
     const getLocalIp = async () => {
-      const data = await fetch(
-          `http://api.ipstack.com/check?access_key=${KEY}`
-        ),
+      const data = await fetch(`https://ipapi.co/json/`),
         json = await data.json();
-
+      console.log(json);
       setInfoIp(json);
     };
 
@@ -26,9 +22,7 @@ function App() {
   //CheckInputIP
   useEffect(() => {
     const getInputIp = async () => {
-      const data = await fetch(
-          `http://api.ipstack.com/${ipData}?access_key=${KEY}`
-        ),
+      const data = await fetch(`https://ipapi.co/${ipData}/json/`),
         json = await data.json();
 
       setInfoIp(json);

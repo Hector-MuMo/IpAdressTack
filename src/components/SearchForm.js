@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 
 const SearchForm = ({ setIpData, infoIp }) => {
-  const { ip, location, city, zip } = infoIp;
+  const { ip, country_name, city, postal, org, timezone, utc_offset } = infoIp;
   const [ipInput, setIpInput] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIpData(ipInput);
   };
-
-  let current_time = new Date().toLocaleString();
 
   return (
     <div className="form-section" style={{ width: "100%", height: "30vh" }}>
@@ -29,12 +27,14 @@ const SearchForm = ({ setIpData, infoIp }) => {
           <p>{ip}</p>
           <label>Location</label>
           <p>
-            {location.capital}, {city} - ZIP {zip}
+            {country_name}, {city} - ZIP {postal}
           </p>
           <label>TimeZone</label>
-          <p>{current_time}</p>
-          <label>Country Flag</label>
-          <p>{location.country_flag_emoji}</p>
+          <p>
+            {timezone} | {utc_offset}
+          </p>
+          <label>ISP</label>
+          <p>{org}</p>
         </article>
       ) : (
         <article className="info-ip">
